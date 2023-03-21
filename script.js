@@ -23,17 +23,35 @@ function form_verify() {
 
   // Username verify
   if (userValue === "") {
-    let message = "Username ne peut pas être vide";
+    let message = "Nom d'utilisateur ne peut pas être vide";
     setError(username, message);
+  } else if (!userValue.match(/^[a-zA-Z]/)) {
+    let message = "Nom d'utilisateur doit commencer par une lettre";
+    setError(username, message);
+  } else if (userValue.length < 3) {
+    console.log(userValue.length);
+    let message = "Nom d'utilisateur doit contenir plus de 3 caractère";
+    setError(username, message);
+  } else {
+    setSuccess(username);
   }
 }
+// Email verify
 
+
+// Fonctions 
 function setError(elem, message) {
   const formControl = elem.parentElement;
   const small = formControl.querySelector("small");
   //ajout du message d'erreur
   small.innerText = message;
-
   //ajout de la classe error
   formControl.className = "form-control error";
+}
+
+function setSuccess(elem) {
+  const formControl = elem.parentElement;
+  const small = formControl.querySelector("small");
+  //ajout de la classe error
+  formControl.className = "form-control success";
 }
